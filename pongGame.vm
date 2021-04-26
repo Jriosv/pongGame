@@ -1,0 +1,209 @@
+function pongGame.new 0
+push constant 1
+call Memory.alloc 1
+pop pointer 0
+push pointer 0
+return
+function pongGame.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function pongGame.moveBall 0
+push argument 0
+pop pointer 0
+push argument 1
+push constant 1
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 2
+call Ball.move45DownRight 1
+pop temp 0
+label IF_FALSE0
+push argument 1
+push constant 2
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push argument 2
+call Ball.move45UpRight 1
+pop temp 0
+label IF_FALSE1
+push constant 0
+return
+function pongGame.runGame 5
+push argument 0
+pop pointer 0
+push constant 0
+pop local 4
+push constant 0
+pop local 3
+push constant 1
+pop this 0
+call Racket.new 0
+pop local 0
+call Racket.new 0
+pop local 1
+push constant 11
+push constant 10
+call Ball.new 2
+pop local 2
+push local 0
+call Racket.makeLeftRacket 1
+pop temp 0
+push local 1
+call Racket.makeRightRacket 1
+pop temp 0
+push local 2
+push constant 0
+not
+call Ball.printBall 2
+pop temp 0
+label WHILE_EXP0
+push local 3
+not
+not
+if-goto WHILE_END0
+call Keyboard.keyPressed 0
+pop local 4
+push pointer 0
+push this 0
+push local 2
+call pongGame.moveBall 3
+pop temp 0
+push local 2
+call Ball.getDirection 1
+pop this 0
+label WHILE_EXP1
+push local 4
+push constant 133
+eq
+not
+if-goto WHILE_END1
+call Keyboard.keyPressed 0
+pop local 4
+push local 1
+call Racket.cleanRightRacket 1
+pop temp 0
+push local 1
+call Racket.moveDown 1
+pop temp 0
+push local 1
+call Racket.makeRightRacket 1
+pop temp 0
+push pointer 0
+push this 0
+push local 2
+call pongGame.moveBall 3
+pop temp 0
+push local 2
+call Ball.getDirection 1
+pop this 0
+push constant 5
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP1
+label WHILE_END1
+label WHILE_EXP2
+push local 4
+push constant 131
+eq
+not
+if-goto WHILE_END2
+call Keyboard.keyPressed 0
+pop local 4
+push local 1
+call Racket.cleanRightRacket 1
+pop temp 0
+push local 1
+call Racket.moveUp 1
+pop temp 0
+push local 1
+call Racket.makeRightRacket 1
+pop temp 0
+push pointer 0
+push this 0
+push local 2
+call pongGame.moveBall 3
+pop temp 0
+push local 2
+call Ball.getDirection 1
+pop this 0
+push constant 5
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP2
+label WHILE_END2
+label WHILE_EXP3
+push local 4
+push constant 87
+eq
+not
+if-goto WHILE_END3
+call Keyboard.keyPressed 0
+pop local 4
+push local 0
+call Racket.cleanLeftRacket 1
+pop temp 0
+push local 0
+call Racket.moveUp 1
+pop temp 0
+push local 0
+call Racket.makeLeftRacket 1
+pop temp 0
+push pointer 0
+push this 0
+push local 2
+call pongGame.moveBall 3
+pop temp 0
+push local 2
+call Ball.getDirection 1
+pop this 0
+push constant 5
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP3
+label WHILE_END3
+label WHILE_EXP4
+push local 4
+push constant 83
+eq
+not
+if-goto WHILE_END4
+call Keyboard.keyPressed 0
+pop local 4
+push local 0
+call Racket.cleanLeftRacket 1
+pop temp 0
+push local 0
+call Racket.moveDown 1
+pop temp 0
+push local 0
+call Racket.makeLeftRacket 1
+pop temp 0
+push pointer 0
+push this 0
+push local 2
+call pongGame.moveBall 3
+pop temp 0
+push local 2
+call Ball.getDirection 1
+pop this 0
+push constant 5
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP4
+label WHILE_END4
+push constant 5
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return

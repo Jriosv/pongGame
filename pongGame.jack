@@ -1,0 +1,101 @@
+class pongGame{
+
+    field int direction;
+
+    constructor pongGame new(){
+        return this;
+    }
+    
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void moveBall(int dir, Ball newBall){
+        if(dir = 1){ do newBall.move45DownRight(); }
+        if(dir = 2){ do newBall.move45UpRight(); }
+        return;
+    }
+
+
+    method void runGame(){ 
+
+        //Instance elements such as rackets, balls, key, etc
+        var Racket left, right;
+        var Ball ball;
+        var boolean exit;
+        var int key;
+
+        //while's access
+        let key = 0;
+        let exit = false;
+        let direction = 1;
+
+        //create rackets and ball
+        let left = Racket.new();
+        let right = Racket.new();
+        let ball = Ball.new(11,10);
+
+        //print rackets and ball
+        do left.makeLeftRacket();
+        do right.makeRightRacket();
+        do ball.printBall(true);
+ 
+        //Start Game-----------------------------------------------------------------------------
+        while(~exit){
+            //waiting a key
+            let key = Keyboard.keyPressed();
+
+            //moving the ball always
+            do moveBall(direction, ball);
+            let direction = ball.getDirection();
+
+            //move Right Racket
+            while(key = 133){
+                let key = Keyboard.keyPressed();    
+                do right.cleanRightRacket();
+                do right.moveDown();
+                do right.makeRightRacket();
+                do moveBall(direction, ball);
+                let direction = ball.getDirection();
+                do Sys.wait(5); 
+
+            }
+            while(key = 131){
+                let key = Keyboard.keyPressed();              
+                do right.cleanRightRacket();                
+                do right.moveUp();
+                do right.makeRightRacket();
+                do moveBall(direction, ball);
+                let direction = ball.getDirection();
+                do Sys.wait(5);  
+            }
+
+            //move left Racket
+            while(key = 87){
+                let key = Keyboard.keyPressed();
+                do left.cleanLeftRacket();
+                do left.moveUp();
+                do left.makeLeftRacket();
+                do moveBall(direction, ball);
+                let direction = ball.getDirection();
+                do Sys.wait(5); 
+            }
+
+            while(key = 83){
+                let key = Keyboard.keyPressed();
+                do left.cleanLeftRacket(); 
+                do left.moveDown();
+                do left.makeLeftRacket();
+                do moveBall(direction, ball);
+                let direction = ball.getDirection();
+                do Sys.wait(5); 
+            }
+
+            do Sys.wait(5);
+
+        }
+    
+        return;
+    }
+}

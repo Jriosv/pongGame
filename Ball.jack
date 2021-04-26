@@ -1,0 +1,94 @@
+class Ball{
+
+    field int x;
+    field int y;
+    field int direction;
+
+    constructor Ball new(int newX, int newY){
+        let x = newX;
+        let y = newY;
+        let direction = 1;
+
+        return this;
+    }
+
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method int getDirection(){
+        return direction;
+    }
+
+    method void printBall(boolean color){
+        do Screen.setColor(color);
+        do Screen.drawCircle(x,y,5);
+
+        return;
+    }
+
+
+    method void move45DownRight(){
+        if(y<250){
+            do printBall(false);
+            let x = x + 1;
+            let y = y + 1;
+            do printBall(true);
+        }
+        
+        if(y=249){
+            let direction = 2;
+        }
+               
+        return;
+    }
+
+    method void move45UpRight(){
+        if(y>5){
+            do printBall(false);
+            let x = x + 1;
+            let y = y - 1;
+            do printBall(true);
+        }else{
+            let direction = 1;
+        }
+                
+        return;
+    }
+
+    method void moveRight(){
+        do printBall(false);
+        let x = x + 1;
+        do printBall(true);
+
+        return;
+    }
+
+    method void moveLeft(){
+        do printBall(false);
+        let x = x - 1;
+        do printBall(true);
+
+        return;
+    }
+
+    method void move45upLeft(){
+        do printBall(false);
+        let x = x - 1;
+        let y = y - 1;
+        do printBall(true); 
+        
+        return;
+    }
+
+    method void move45DownLeft(){
+        do printBall(false);
+        let x = x - 1;
+        let y = y + 1;
+        do printBall(true); 
+        
+        return;
+    }
+
+}

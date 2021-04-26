@@ -1,0 +1,99 @@
+class Racket{
+
+    field int y1;  //"This is the first "Y" value of top left corner"
+    field int leftY1; //first Y value
+    field int leftY2; //second Y value
+    field int leftY3; //third Y value
+
+    /*field int y2;  //"This is the first "Y" value of top left corner"
+    field int rightY1; //first Y value
+    field int rightY2; //second Y value
+    field int rightY3; //third Y value*/
+
+    
+    constructor Racket new(){
+        let y1 = 0;
+        let leftY1 = 12;
+        let leftY2 = 24;
+        let leftY3 = 36;
+
+        /*let y2 = 0;
+        let rightY1 = 12;
+        let leftY2 = 24;
+        let leftY1 = 36;*/
+        
+        return this;
+    }
+
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void makeLeftRacket(){
+        do Screen.setColor(true);
+        //divide rectangle in 3 parts
+        do Screen.drawRectangle(0,y1,6,leftY1);
+        do Screen.drawRectangle(0,leftY1,6,leftY2);
+        do Screen.drawRectangle(0,leftY2,6,leftY3);
+
+        return;
+    }
+
+    method void makeRightRacket(){
+        do Screen.setColor(true);
+        //divide rectangle in 3 parts
+        do Screen.drawRectangle(505,y1,511,leftY1);
+        do Screen.drawRectangle(505,leftY1,511,leftY2);
+        do Screen.drawRectangle(505,leftY2,511,leftY3);
+
+        return;
+    }
+
+
+    method void moveDown(){
+        if(~(leftY3=255)){
+            let y1 = y1 + 1;
+            let leftY1 = leftY1 + 1;
+            let leftY2 = leftY1 + 12;
+            let leftY3 = leftY2 + 12; 
+        }
+        
+        return;
+    }
+
+    method void moveUp(){
+        if(~(y1=0)){
+            let y1 = y1 - 1;
+            let leftY1 = leftY1 - 1;
+            let leftY2 = leftY1 + 12;
+            let leftY3 = leftY2 + 12;
+        }
+        
+        return;
+    }
+
+    method void cleanRightRacket(){
+        do Screen.setColor(false);
+
+        //Draw white rectangle
+        do Screen.drawRectangle(505,y1,511,leftY1);
+        do Screen.drawRectangle(505,leftY1,511,leftY2);
+        do Screen.drawRectangle(505,leftY2,511,leftY3);
+        
+        return;
+    }
+
+    method void cleanLeftRacket(){
+        do Screen.setColor(false);
+
+        //Draw white rectangle
+        do Screen.drawRectangle(0,y1,6,leftY1);
+        do Screen.drawRectangle(0,leftY1,6,leftY2);
+        do Screen.drawRectangle(0,leftY2,6,leftY3);
+        
+        return;
+    }
+
+    
+}
